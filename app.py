@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_restful import Resource, Api
 import requests
 import json
@@ -19,7 +19,11 @@ class SearchContents(Resource):
                     'title' : index['title'],
                     'url': index['url']
                 })
-        return {'result': data}
+        
+        response = jsonify(outcome=data)
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        
+        return response
 
 api.add_resource(SearchContents, '/contents/<string:topic>', )
 
