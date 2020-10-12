@@ -14,7 +14,7 @@ class SearchContents(Resource):
         if(response.status_code == 200):
             raw_data = json.loads(response.text)
             for index in raw_data['hits']:
-                if index['title']:
+                if index['title'] and index['url']:
                     data.append({
                         'id': index['objectID'],
                         'title' : index['title'],
