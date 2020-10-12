@@ -13,9 +13,8 @@ class SearchContents(Resource):
         data = []
         if(response.status_code == 200):
             raw_data = json.loads(response.text)
-            
             for index in raw_data['hits']:
-                if topic in str(index['title']):
+                if index['title']:
                     data.append({
                         'id': index['objectID'],
                         'title' : index['title'],
