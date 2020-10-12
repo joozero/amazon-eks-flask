@@ -13,12 +13,14 @@ class SearchContents(Resource):
         data = []
         if(response.status_code == 200):
             raw_data = json.loads(response.text)
+            
             for index in raw_data['hits']:
-                data.append({
-                    'id': index['objectID'],
-                    'title' : index['title'],
-                    'url': index['url']
-                })
+                if topic in str(index['title']):
+                    data.append({
+                        'id': index['objectID'],
+                        'title' : index['title'],
+                        'url': index['url']
+                    })
         
         response = jsonify(outcome=data)
         response.headers.add("Access-Control-Allow-Origin", "*")
