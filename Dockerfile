@@ -1,5 +1,7 @@
-FROM python:3.6
-MAINTAINER Jooyoung Kim "joozero@amazon.com"
-ADD . .
-RUN pip install -r requirements.txt
+FROM python:3.8-slim-buster
+LABEL Author="joozero@amazon.com"
+WORKDIR /app
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
+COPY . .
 CMD ["python3", "app.py"]
