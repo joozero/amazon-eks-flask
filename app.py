@@ -1,11 +1,12 @@
 from flask import Flask, jsonify
-from flask_restful import Resource, Api
+from flask_restx import Api, Resource
 import requests
 import json
 
 app = Flask(__name__)
 api = Api(app)
 
+@api.route('/contents/<string:topic>')
 class SearchContents(Resource):
     def get(self, topic):
         url = 'https://hn.algolia.com/api/v1/search?query='+topic
@@ -25,8 +26,6 @@ class SearchContents(Resource):
         response.headers.add("Access-Control-Allow-Origin", "*")
         
         return response
-
-api.add_resource(SearchContents, '/contents/<string:topic>', )
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8080)
