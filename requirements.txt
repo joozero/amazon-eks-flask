@@ -1,4 +1,3 @@
-Flask==1.1.2
-Flask-RESTful==0.3.8
+Flask
+flask-restx
 requests
-itsdangerous==2.0.1
